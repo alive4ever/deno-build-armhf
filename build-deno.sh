@@ -3,13 +3,21 @@ HOME="/home/$(whoami)"
 cd $HOME
 umask 022
 DENO_VERSION="v2.5.5"
+V8_VERSION="v140.2.0"
+export V8_FROM_SOURCE=1
 PLATFORM="$(cc -dumpmachine)"
-git clone --depth=1 --branch="$DENO_VERSION" https://github.com/denoland/deno
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
 . $HOME/.cargo/env
 rustc --version
 cargo --version
+export LIBCLANG_PATH=/usr/lib/llvm-19/lib
+git clone --depth=1 --branch="$V8_VERSION" https://github.com/denoland/rusty_v8
+cd ./rusty_v8
+git config -f .gitmodules submodule.v8.shallow true
+git submodule update --init --recursive
+cd -
+git clone --depth=1 --branch="$DENO_VERSION" https://github.com/denoland/deno
 cd ./deno
 mkdir -p /tmp/hosttmp/deno_deb
 cargo build --release
