@@ -1,4 +1,6 @@
 set -e
+HOME="/home/$(whoami)"
+cd $HOME
 umask 022
 DENO_VERSION="v2.5.5"
 PLATFORM="$(cc -dumpmachine)"
