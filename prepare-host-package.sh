@@ -6,6 +6,7 @@ sudo apt install -y mmdebstrap systemd-container debian-archive-keyring
 	curl -sSLO http://raspbian.raspberrypi.com/raspbian/pool/main/r/raspbian-archive-keyring/raspbian-archive-keyring_20120528.4_all.deb && \
 	sudo apt install -y ./raspbian-archive-keyring_20120528.4_all.deb && \
 	cd - )
-sudo mmdebstrap --arch=armhf --include sudo,curl,build-essential,devscripts,clang,protobuf-compiler,python3,python3-venv,ninja-build,generate-ninja,cmake,git,nodejs trixie /var/lib/machines/armhf-raspbian http://raspbian.raspberrypi.com/raspbian
+RASPBIAN_KEYRING="/usr/share/keyrings/raspbian-archive-keyring.gpg"
+sudo mmdebstrap --arch=armhf --keyring="$RASPBIAN_KEYRING" --include sudo,curl,build-essential,devscripts,clang,protobuf-compiler,python3,python3-venv,ninja-build,generate-ninja,cmake,git,nodejs trixie /var/lib/machines/armhf-raspbian http://raspbian.raspberrypi.com/raspbian
 echo "Container successfully created"
 
