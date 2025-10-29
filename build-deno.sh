@@ -5,6 +5,9 @@ umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
 export V8_FROM_SOURCE=1
+export CLANG_BASE_PATH="/usr"
+export GN="$(command -v gn)"
+export NINJA="$(command -v ninja)"
 PLATFORM="$(cc -dumpmachine)"
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
