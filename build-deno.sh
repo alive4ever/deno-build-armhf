@@ -8,7 +8,12 @@ export V8_FROM_SOURCE=1
 export CLANG_BASE_PATH="/usr"
 export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
-PLATFORM="$(cc -dumpmachine)"
+export CC="clang"
+export CXX="clang++"
+CLANG_VERSION=$(clang -dumpversion | cut -d . -f 1)
+export EXTRA_GN_ARGS="custom_toolchain=\"//build/toolchain/linux/unbundle:default\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" clang_version=\"$CLANG_VERSION\""
+
+PLATFORM="$($CC -dumpmachine)"
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
 . $HOME/.cargo/env
