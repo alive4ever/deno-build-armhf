@@ -7,6 +7,7 @@ PLATFORM="$(cc -dumpmachine)"
 git clone --depth=1 --branch="$DENO_VERSION" https://github.com/denoland/deno
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
+. $HOME/.cargo/env
 rustc --version
 cargo --version
 cd ./deno
