@@ -1,7 +1,7 @@
 set -e
 umask 022
 DENO_VERSION="v2.5.5"
-PLATFORM="$(cc --dumpmachine)"
+PLATFORM="$(cc -dumpmachine)"
 git clone --depth=1 --branch="$DENO_VERSION" https://github.com/denoland/deno
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
