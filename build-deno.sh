@@ -4,22 +4,23 @@ cd $HOME
 umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
-export V8_FROM_SOURCE=1
-export CLANG_BASE_PATH="/usr"
-export GN="$(command -v gn)"
-export NINJA="$(command -v ninja)"
 export CC="clang"
 export CXX="clang++"
-CLANG_VERSION=$(clang -dumpversion | cut -d . -f 1)
-export EXTRA_GN_ARGS="custom_toolchain=\"//build/toolchain/linux/unbundle:default\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" clang_version=\"$CLANG_VERSION\""
-
 PLATFORM="$($CC -dumpmachine)"
+export HOST="$PLATFORM"
+export V8_FROM_SOURCE=1
+export GN="$(command -v gn)"
+export NINJA="$(command -v ninja)"
+CLANG_VERSION=$(clang -dumpversion | cut -d . -f 1)
+export CLANG_BASE_PATH="/usr/lib/llvm-${CLANG_VERSION}"
+export LIBCLANG_PATH=/usr/lib/llvm-19/lib
+export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" target_name=\"$PLATFORM\""
+
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
 . $HOME/.cargo/env
 rustc --version
 cargo --version
-export LIBCLANG_PATH=/usr/lib/llvm-19/lib
 git clone --depth=1 --branch="$V8_VERSION" https://github.com/denoland/rusty_v8
 cd ./rusty_v8
 git config -f .gitmodules submodule.v8.shallow true
