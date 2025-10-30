@@ -16,6 +16,6 @@ if ! [ -r "$RASPBIAN_KEYRING" ]; then
 echo "Unable to access $RASPBIAN_KEYRING"
 exit 255
 fi
-sudo mmdebstrap --arch=armhf --keyring="$RASPBIAN_KEYRING" --include sudo,curl,build-essential,devscripts,clang,protobuf-compiler,python3,python3-venv,ninja-build,generate-ninja,cmake,git,nodejs,lld,libclang-dev trixie /var/lib/machines/armhf-raspbian http://raspbian.raspberrypi.com/raspbian
+sudo mmdebstrap --arch=armhf --keyring="$RASPBIAN_KEYRING" --include sudo,curl,build-essential,devscripts,clang,protobuf-compiler,python3,python3-venv,ninja-build,generate-ninja,cmake,git,nodejs,lld,libclang-dev,sccache trixie /var/lib/machines/armhf-raspbian http://raspbian.raspberrypi.com/raspbian
 echo "Container successfully created"
 
