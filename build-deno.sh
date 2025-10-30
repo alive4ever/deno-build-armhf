@@ -8,6 +8,7 @@ export CC="clang"
 export CXX="clang++"
 PLATFORM="$($CC -dumpmachine)"
 export HOST="arm"
+export CARGO_CFG_TARGET_ARCH="arm"
 export V8_FROM_SOURCE=1
 export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
@@ -15,6 +16,7 @@ export SCCACHE="$(command -v sccache)"
 CLANG_VERSION=$(clang -dumpversion | cut -d . -f 1)
 export CLANG_BASE_PATH="/usr/lib/llvm-${CLANG_VERSION}"
 export LIBCLANG_PATH=/usr/lib/llvm-19/lib
+export TARGET="$PLATFORM"
 export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\""
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
