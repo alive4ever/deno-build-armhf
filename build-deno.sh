@@ -21,9 +21,10 @@ export GN_ARGS="target_cpu=\"arm\" v8_target_cpu=\"arm\""
 export PRINT_GN_ARGS=1
 export TARGET="armv7-unknown-linux-gnueabihf"
 export CARGO_CFG_TARGET_ARCH="$TARGET"
+export CARGO_BUILD_TARGET="$TARGET"
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
-sh rustup-install.sh -y
+sh rustup-install.sh -y -t "$TARGET"
 . $HOME/.cargo/env
 rustc --version
 cargo --version
