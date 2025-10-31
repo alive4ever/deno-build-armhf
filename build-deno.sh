@@ -33,6 +33,8 @@ git clone --depth=1 --branch="$V8_VERSION" https://github.com/denoland/rusty_v8
 cd ./rusty_v8
 git config -f .gitmodules submodule.v8.shallow true
 git submodule update --init --recursive
+echo "Installing build dependencies"
+python3 ./build/install-build-deps.py
 cd -
 git clone --depth=1 --branch="$DENO_VERSION" https://github.com/denoland/deno
 cd ./deno
