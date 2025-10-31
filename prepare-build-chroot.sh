@@ -3,8 +3,5 @@ echo "deb http://apt.llvm.org/trixie/ llvm-toolchain-trixie-21 main" > /etc/apt/
 curl -sSL https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 apt-get update
 apt-get install -y lld-21 clang-21 clang-tools-21 clang-tidy-21 clang-format-21 libclang-21-dev
-for pkg in lld-21 clang-21 clang-tools-21 clang-tidy-21 clang-format-21 libclang-21-dev; do
-dpkg -L $pkg | grep bin
-done
 useradd -m -G sudo -s /bin/bash builder
 passwd -d builder
