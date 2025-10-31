@@ -17,7 +17,7 @@ export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
 export SCCACHE="$(command -v sccache)"
 export DISABLE_CLANG=1
-export GN_ARGS="use_sysroot=\"false\" target_cpu=\"arm\" v8_target_cpu=\"arm\""
+export GN_ARGS="use_sysroot=\"false\" target_cpu=\"arm\" v8_target_cpu=\"arm\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" custom_toolchain=\"//build/toolchain/linux/unbundle:default\""
 export PRINT_GN_ARGS=1
 export TARGET="armv7-unknown-linux-gnueabihf"
 export CARGO_CFG_TARGET_ARCH="$TARGET"
