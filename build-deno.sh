@@ -16,7 +16,7 @@ export SCCACHE="$(command -v sccache)"
 export DISABLE_CLANG=1
 export GN_ARGS="target_cpu=\"arm\" v8_target_cpu=\"arm\""
 export PRINT_GN_ARGS=1
-export TARGET="armv6-unknown-linux-gnueabihf"
+export TARGET="armv7-unknown-linux-gnueabihf"
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
