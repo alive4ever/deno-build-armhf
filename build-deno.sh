@@ -13,7 +13,6 @@ export V8_FROM_SOURCE=1
 export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
 export SCCACHE="$(command -v sccache)"
-CLANG_VERSION=$(clang -dumpversion | cut -d . -f 1)
 export DISABLE_CLANG=1
 export GN_ARGS="target_cpu=\"arm\" v8_target_cpu=\"arm\""
 export PRINT_GN_ARGS=1
