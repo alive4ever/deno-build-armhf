@@ -4,20 +4,18 @@ cd $HOME
 umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
-export CC="clang"
-export CXX="clang++"
+export CC="gcc"
+export CXX="g++"
 PLATFORM="$($CC -dumpmachine)"
 export HOST="arm"
 export TARGET="arm"
-export CARGO_CFG_TARGET_ARCH="arm"
 export V8_FROM_SOURCE=1
 export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
 export SCCACHE="$(command -v sccache)"
 CLANG_VERSION=$(clang -dumpversion | cut -d . -f 1)
-export CLANG_BASE_PATH="/usr"
-export LIBCLANG_PATH=/usr/lib/llvm-19/lib
-export GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\""
+export DISABLE_CLANG=1
+export GN_ARGS="target_cpu=\"arm\" v8_target_cpu=\"arm\""
 export PRINT_GN_ARGS=1
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
