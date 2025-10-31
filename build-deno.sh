@@ -5,9 +5,12 @@ umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
 PREFIX="arm-linux-gnueabihf"
-PATH="/usr/${PREFIX}/bin:$PATH"
 export CC="$PREFIX-gcc"
 export CXX="$PREFIX-g++"
+export LD="$PREFIX-ld"
+export AR="$PREFIX-ar"
+export NM="$PREFIX-nm"
+export RANLIB="$PREFIX-ranlib"
 PLATFORM="$($CC -dumpmachine)"
 export V8_FROM_SOURCE=1
 export GN="$(command -v gn)"
@@ -16,7 +19,8 @@ export SCCACHE="$(command -v sccache)"
 export DISABLE_CLANG=1
 export GN_ARGS="target_cpu=\"arm\" v8_target_cpu=\"arm\""
 export PRINT_GN_ARGS=1
-export TARGET="armv7-unknown-linux-gnueabihf"
+export TARGET="arm"
+export CARGO_CFG_TARGET_ARCH="arm"
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y
