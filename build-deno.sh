@@ -11,6 +11,7 @@ PREFIX="arm-linux-gnueabihf"
 export CC="clang"
 export CXX="clang++"
 PLATFORM="$($CC -dumpmachine)"
+export RUST_BACKTRACE=1
 export V8_FROM_SOURCE=1
 export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
