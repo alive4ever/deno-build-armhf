@@ -4,9 +4,10 @@ cd $HOME
 umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
+CLANG_VERSION="$(clang -dumpversion | cut -d . -f 1)"
 PREFIX="arm-linux-gnueabihf"
-export CC="$PREFIX-gcc"
-export CXX="$PREFIX-g++"
+export CC="clang"
+export CXX="clang++"
 export LD="$PREFIX-ld"
 export AR="$PREFIX-ar"
 export NM="$PREFIX-nm"
@@ -16,8 +17,9 @@ export V8_FROM_SOURCE=1
 export GN="$(command -v gn)"
 export NINJA="$(command -v ninja)"
 export SCCACHE="$(command -v sccache)"
-export DISABLE_CLANG=1
-export GN_ARGS="use_sysroot=\"false\" target_cpu=\"arm\" v8_target_cpu=\"arm\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" custom_toolchain=\"//build/toolchain/linux/unbundle:default\""
+export CLANG_BASE_PATH="/usr/lib/llvm-$CLANG_VERSION"
+export LIBCLANG_PATH="/usr/lib/llvm-$CLANG_VERSION/lib"
+export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" custom_toolchain=\"//build/toolchain/linux/unbundle:default\" v8_enable_pointer_compression=\"false\""
 export PRINT_GN_ARGS=1
 export TARGET="armv7-unknown-linux-gnueabihf"
 export CARGO_CFG_TARGET_ARCH="$TARGET"
