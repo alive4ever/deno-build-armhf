@@ -24,7 +24,7 @@ export CARGO_CFG_TARGET_ARCH="$TARGET"
 export CARGO_BUILD_TARGET="$TARGET"
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
-sh rustup-install.sh -y -t "$TARGET"
+sh rustup-install.sh -y -t "$TARGET" --default-toolchain 1.90.0
 . $HOME/.cargo/env
 rustc --version
 cargo --version
