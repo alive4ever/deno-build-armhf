@@ -4,7 +4,7 @@ cd $HOME
 umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
-CLANG_VERSION="21"
+CLANG_VERSION="20"
 export CLANG_BASE_PATH="/usr/lib/llvm-$CLANG_VERSION"
 PATH="$CLANG_BASE_PATH/bin:$PATH"
 PREFIX="arm-linux-gnueabihf"
