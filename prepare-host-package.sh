@@ -5,15 +5,15 @@ sudo apt update
 sudo apt install -y mmdebstrap systemd-container debian-archive-keyring
 cat << EOL > /tmp/debian.sources
 Types: deb deb-src
-URIs: http://deb.debian.org/debian
+URIs: https://deb.debian.org/debian/
 Suites: $DEBIAN_CODENAME $DEBIAN_CODENAME-updates
-Components: main non-free-firmware
+Components: main contrib
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
 Types: deb deb-src
-URIs: https://security.debian.org/debian-security
+URIs: https://security.debian.org/debian-security/
 Suites: $DEBIAN_CODENAME-security
-Components: main non-free-firmware
+Components: main contrib
 Enabled: yes
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOL
