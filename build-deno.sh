@@ -8,9 +8,11 @@ CLANG_VERSION="20"
 export CLANG_BASE_PATH="/usr/lib/llvm-$CLANG_VERSION"
 PATH="$CLANG_BASE_PATH/bin:$PATH"
 PREFIX="arm-linux-gnueabihf"
-export CC="clang"
-export CXX="clang++"
+CLANG_TARGET="armv7-unknown-linux-gnu"
+export CC="scache clang -target $CLANG_TARGET -fuse-ld=lld"
+export CXX="scache clang++ -target $CLANG_TARGET -fuse-ld=lld"
 PLATFORM="$($CC -dumpmachine)"
+export RUST_WRAPPER="sccache"
 export RUST_BACKTRACE=1
 export V8_FROM_SOURCE=1
 export SCCACHE="$(command -v sccache)"
