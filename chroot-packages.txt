@@ -1,5 +1,6 @@
 sudo
 curl
+ca-certificates
 build-essential
 devscripts
 protobuf-compiler
@@ -13,3 +14,4 @@ gcc-arm-linux-gnueabihf
 podman
 pkgconf
 lsb-release
+~pstandard
