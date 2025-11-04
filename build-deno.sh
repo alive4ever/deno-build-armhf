@@ -32,6 +32,7 @@ cargo --version
 rustup target add "$RUST_TARGET"
 curl -L -o uv-install.sh https://astral.sh/uv/install.sh
 sh uv-install.sh
+. $HOME/.local/bin/env
 uv --version
 uv python install "$PYTHON_VERSION"
 python"$PYTHON_VERSION" --version
