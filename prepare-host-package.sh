@@ -17,6 +17,6 @@ Components: main contrib
 Enabled: yes
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOL
-cat /tmp/debian.sources | sudo mmdebstrap --keyring=/usr/share/keyrings --arch=arm64 --include $(</tmp/chroot-packages.txt) "$DEBIAN_CODENAME" /var/lib/machines/arm64-debian -
+cat /tmp/debian.sources | sudo mmdebstrap --keyring=/usr/share/keyrings --arch=arm64 --include "$(</tmp/chroot-packages.txt)" "$DEBIAN_CODENAME" /var/lib/machines/arm64-debian -
 echo "Container successfully created"
 
