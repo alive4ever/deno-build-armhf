@@ -3,6 +3,20 @@ umask 022
 DEBIAN_CODENAME="bookworm"
 sudo apt update
 sudo apt install -y mmdebstrap systemd-container debian-archive-keyring
-sudo mmdebstrap --arch=arm64 --include sudo,curl,build-essential,devscripts,protobuf-compiler,python3,python3-venv,ninja-build,generate-ninja,cmake,git,nodejs,sccache,gcc-arm-linux-gnueabihf,podman,pkg-config,lsb-release "$DEBIAN_CODENAME" /var/lib/machines/arm64-debian http://deb.debian.org/debian
+cat << EOL > /tmp/debian.sources
+Types: deb deb-src
+URIs: http://deb.debian.org/debian
+Suites: $DEBIAN_CODENAME $DEBIAN_CODENAME-updates
+Components: main non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+Types: deb deb-src
+URIs: https://security.debian.org/debian-security
+Suites: $DEBIAN_CODENAME-security
+Components: main non-free-firmware
+Enabled: yes
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOL
+cat /tmp/debian.sources | sudo mmdebstrap --keyring=/usr/share/keyrings --arch=arm64 --include $(</tmp/chroot-packages.txt) "$DEBIAN_CODENAME" /var/lib/machines/arm64-debian -
 echo "Container successfully created"
 
