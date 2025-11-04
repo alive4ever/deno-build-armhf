@@ -5,6 +5,7 @@ umask 022
 DENO_VERSION="v2.5.5"
 V8_VERSION="v140.2.0"
 CLANG_VERSION="20"
+PYTHON_VERSION="3.13"
 export CLANG_BASE_PATH="/usr/lib/llvm-$CLANG_VERSION"
 PATH="$CLANG_BASE_PATH/bin:$PATH"
 PREFIX="arm-linux-gnueabihf"
@@ -29,6 +30,15 @@ sh rustup-install.sh -y -t "$RUST_TARGET" --default-toolchain 1.90.0
 rustc --version
 cargo --version
 rustup target add "$RUST_TARGET"
+curl -L -o uv-install.sh https://astral.sh/uv/install.sh
+sh uv-install.sh
+uv --version
+uv python install "$PYTHON_VERSION"
+python"$PYTHON_VERSION" --version
+uv venv
+. ./.venv/bin/activate
+uv pip install -U setuptools pip jinja2
+pip --version
 git clone --depth=1 --branch="$V8_VERSION" https://github.com/denoland/rusty_v8
 cd ./rusty_v8
 git config -f .gitmodules submodule.v8.shallow true
