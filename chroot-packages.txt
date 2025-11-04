@@ -1,0 +1,15 @@
+sudo
+curl
+build-essential
+devscripts
+protobuf-compiler
+ninja-build
+generate-ninja
+cmake
+git
+nodejs
+sccache
+gcc-arm-linux-gnueabihf
+podman
+pkgconf
+lsb-release
