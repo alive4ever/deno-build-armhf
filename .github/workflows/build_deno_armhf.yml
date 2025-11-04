@@ -23,6 +23,7 @@ jobs:
           cp -v ${{ github.workspace }}/prepare-build-chroot.sh /tmp/
           cp -v ${{ github.workspace }}/build-deno.sh /tmp/
           cp -v ${{ github.workspace }}/packages.txt /tmp/
+          cp -v ${{ github.workspace }}/chroot-packages.txt /tmp/
           sudo systemd-nspawn --bind /tmp:/tmp/hosttmp --bind-ro /etc/resolv.conf --hostname localhost --machine arm64-debian -- sh /tmp/hosttmp/prepare-build-chroot.sh
           sudo systemd-nspawn --bind /tmp:/tmp/hosttmp --bind-ro /etc/resolv.conf --hostname localhost --machine arm64-debian --user builder -- sh /tmp/hosttmp/build-deno.sh
       - name: Uploading artifacts
