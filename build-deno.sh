@@ -2,6 +2,7 @@ set -e
 HOME="/home/$(whoami)"
 cd $HOME
 umask 022
+DEBIAN_CODENAME="trixie"
 DENO_VERSION="v2.9.5"
 V8_VERSION="v152.1.0"
 CLANG_VERSION="21"
@@ -13,19 +14,21 @@ export TARGET_CXX="$PREFIX-g++"
 PATH="$CLANG_BASE_PATH/bin:$PATH"
 CLANG_TARGET="armv7-unknown-linux-gnu"
 PLATFORM="$($PREFIX-gcc -dumpmachine)"
+SYSROOT="$HOME/$PREFIX-sysroot"
 export RUST_WRAPPER="sccache"
 export RUST_BACKTRACE=1
 export V8_FROM_SOURCE=1
 export SCCACHE="$(command -v sccache)"
 export LIBCLANG_PATH="/usr/lib/llvm-$CLANG_VERSION/lib"
-export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\" v8_enable_pointer_compression=false sysroot=\"/usr/$PREFIX\""
+export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\" v8_enable_pointer_compression=false sysroot=\"$SYSROOT\""
 export PRINT_GN_ARGS=1
 RUST_TARGET="armv7-unknown-linux-gnueabihf"
 #export CARGO_BUILD_TARGET="$RUST_TARGET"
 export CC_armv7_unknown_linux_gnueabihf="$PREFIX-gcc"
 export CXX_armv7_unknown_linux_gnueabihf="$PREFIX-g++"
 export AR_armv7_unknown_linux_gnueabihf="$PREFIX-ar"
-export CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER="$PREFIX-ld"
+export CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER="$PREFIX-gcc"
+export CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_RUSTFLAGS="-C link-arg=--sysroot=$SYSROOT"
 export QEMU_LD_PREFIX="/usr/$PREFIX"
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y -t "$RUST_TARGET" --default-toolchain 1.95.0
@@ -44,6 +47,7 @@ uv venv
 . ./.venv/bin/activate
 uv pip install -U setuptools pip jinja2
 pip --version
+sudo mmdebstrap --arch=armhf --include libglib2.0-dev,zlib1g-dev,libzstd-dev,libncurses-dev,linux-headers-armmp,build-essential "$DEBIAN_CODENAME" $HOME/$PREFIX-sysroot
 git clone --depth=1 --branch="$V8_VERSION" https://github.com/denoland/rusty_v8
 cd ./rusty_v8
 git config -f .gitmodules submodule.v8.shallow true
