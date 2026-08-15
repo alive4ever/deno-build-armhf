@@ -2,16 +2,16 @@ set -e
 HOME="/home/$(whoami)"
 cd $HOME
 umask 022
-DENO_VERSION="v2.5.5"
-V8_VERSION="v140.2.0"
-CLANG_VERSION="19"
-PYTHON_VERSION="3.13"
+DENO_VERSION="v2.9.5"
+V8_VERSION="v152.1.0"
+CLANG_VERSION="21"
+PYTHON_VERSION="3.14"
 export CLANG_BASE_PATH="/usr/lib/llvm-$CLANG_VERSION"
 PATH="$CLANG_BASE_PATH/bin:$PATH"
 PREFIX="arm-linux-gnueabihf"
 CLANG_TARGET="armv7-unknown-linux-gnu"
-export CC="clang -target $CLANG_TARGET -fuse-ld=lld"
-export CXX="clang++ -target $CLANG_TARGET -fuse-ld=lld"
+export CC="clang-$CLANG_VERSION -target $CLANG_TARGET -fuse-ld=lld"
+export CXX="clang++-$CLANG_VERSION -target $CLANG_TARGET -fuse-ld=lld"
 PLATFORM="$($CC -dumpmachine)"
 export RUST_WRAPPER="sccache"
 export RUST_BACKTRACE=1
@@ -25,7 +25,7 @@ export CARGO_CFG_TARGET_ARCH="$RUST_TARGET"
 export CARGO_BUILD_TARGET="$RUST_TARGET"
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
-sh rustup-install.sh -y -t "$RUST_TARGET" --default-toolchain 1.90.0
+sh rustup-install.sh -y -t "$RUST_TARGET" --default-toolchain 1.95.0
 . $HOME/.cargo/env
 rustc --version
 cargo --version
@@ -50,7 +50,7 @@ cd ./deno
 mkdir -p /tmp/hosttmp/deno_deb
 cargo build --target "$RUST_TARGET" --release
 echo "Build succeeded at $(date -u)"
-podman run --rm -v ./target/release/deno:/bin/deno arm32v7/busybox deno run tests/testdata/run/002_hello.ts
+podman run --rm -v ./target/release/deno:/bin/deno gcr.io/distroless/cc /bin/deno run tests/testdata/run/002_hello.ts
 echo "Hello test succeeded"
 TGZNAME="deno-"$DENO_VERSION"-"$PLATFORM".tar.gz"
 tar --numeric-owner -C ./target/release/ -cf - . | gzip -n > /tmp/hosttmp/deno_deb/"$TGZNAME"
