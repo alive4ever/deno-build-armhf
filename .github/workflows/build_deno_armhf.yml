@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Preparing repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Preparing armhf chroot
         id: preparing-armhf-chroot
         run: |
@@ -27,12 +27,12 @@ jobs:
           sudo systemd-nspawn --bind /tmp:/tmp/hosttmp --bind-ro /etc/resolv.conf --hostname localhost --machine arm64-debian -- sh /tmp/hosttmp/prepare-build-chroot.sh
           sudo systemd-nspawn --bind /tmp:/tmp/hosttmp --bind-ro /etc/resolv.conf --hostname localhost --machine arm64-debian --user builder -- sh /tmp/hosttmp/build-deno.sh
       - name: Uploading artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: deb-package
           path: /tmp/deno_deb/
       - name: Creating release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
