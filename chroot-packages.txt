@@ -1,1 +1,1 @@
-sudo,curl,ca-certificates,build-essential,devscripts,protobuf-compiler,ninja-build,generate-ninja,cmake,git,nodejs,sccache,gcc-arm-linux-gnueabihf,podman,pkgconf,lsb-release
+sudo,curl,ca-certificates,build-essential,devscripts,protobuf-compiler,ninja-build,generate-ninja,cmake,git,nodejs,sccache,gcc-arm-linux-gnueabihf,g++-arm-linux-gnueabihf,podman,pkgconf,lsb-release,libc6-armhf-cross
