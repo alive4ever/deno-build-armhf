@@ -1,6 +1,6 @@
 export DEBIAN_FRONTEND="noninteractive"
 DEBIAN_CODENAME="bookworm"
-wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+curl -L https://apt.llvm.org/llvm-snapshot.gpg.key | tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 echo 'deb http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-21 main
 deb-src http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-21 main
 ' | tee /etc/apt/sources.list.d/llvm.list
