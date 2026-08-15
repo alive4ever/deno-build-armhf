@@ -2,7 +2,6 @@ set -e
 HOME="/home/$(whoami)"
 cd $HOME
 umask 022
-DEBIAN_CODENAME="trixie"
 DENO_VERSION="v2.9.5"
 V8_VERSION="v152.1.0"
 CLANG_VERSION="21"
@@ -14,7 +13,7 @@ export TARGET_CXX="$PREFIX-g++"
 PATH="$CLANG_BASE_PATH/bin:$PATH"
 CLANG_TARGET="armv7-unknown-linux-gnu"
 PLATFORM="$($PREFIX-gcc -dumpmachine)"
-SYSROOT="$HOME/$PREFIX-sysroot"
+SYSROOT="/var/lib/$PREFIX-sysroot"
 export RUST_WRAPPER="sccache"
 export RUST_BACKTRACE=1
 export V8_FROM_SOURCE=1
