@@ -8,11 +8,9 @@ CLANG_VERSION="21"
 PYTHON_VERSION="3.14"
 export CLANG_BASE_PATH="/usr/lib/llvm-$CLANG_VERSION"
 PREFIX="arm-linux-gnueabihf"
-export CC="$PREFIX-gcc"
-export CXX="$PREFIX-g++"
-export TARGET_CC="$CC"
-export TARGET_CXX="$CXX"
-PATH="/usr/$PREFIX/bin:$CLANG_BASE_PATH/bin:$PATH"
+export TARGET_CC="$PREFIX-gcc"
+export TARGET_CXX="$PREFIX-g++"
+PATH="$CLANG_BASE_PATH/bin:$PATH"
 CLANG_TARGET="armv7-unknown-linux-gnu"
 PLATFORM="$($PREFIX-gcc -dumpmachine)"
 export RUST_WRAPPER="sccache"
@@ -23,8 +21,11 @@ export LIBCLANG_PATH="/usr/lib/llvm-$CLANG_VERSION/lib"
 export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" custom_toolchain=\"//build/toolchain/linux/unbundle:default\" v8_enable_pointer_compression=false c_additional_outputs=[] sysroot=\"/usr/$PREFIX\""
 export PRINT_GN_ARGS=1
 RUST_TARGET="armv7-unknown-linux-gnueabihf"
-export CARGO_CFG_TARGET_ARCH="$RUST_TARGET"
-export CARGO_BUILD_TARGET="$RUST_TARGET"
+#export CARGO_BUILD_TARGET="$RUST_TARGET"
+export CC_armv7_unknown_linux_gnueabihf="$PREFIX-gcc"
+export CXX_armv7_unknown_linux_gnueabihf="$PREFIX-g++"
+export AR_armv7_unknown_linux_gnueabihf="$PREFIX-ar"
+export CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF="$PREFIX-ld"
 
 curl -L -o rustup-install.sh https://sh.rustup.rs
 sh rustup-install.sh -y -t "$RUST_TARGET" --default-toolchain 1.95.0
@@ -32,6 +33,7 @@ sh rustup-install.sh -y -t "$RUST_TARGET" --default-toolchain 1.95.0
 rustc --version
 cargo --version
 rustup target add "$RUST_TARGET"
+rustup target list --installed
 curl -L -o uv-install.sh https://astral.sh/uv/install.sh
 sh uv-install.sh
 . $HOME/.local/bin/env
