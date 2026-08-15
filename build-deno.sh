@@ -46,7 +46,6 @@ uv venv
 . ./.venv/bin/activate
 uv pip install -U setuptools pip jinja2
 pip --version
-sudo mmdebstrap --arch=armhf --include libglib2.0-dev,zlib1g-dev,libzstd-dev,libncurses-dev,linux-headers-armmp,build-essential "$DEBIAN_CODENAME" $HOME/$PREFIX-sysroot
 git clone --depth=1 --branch="$V8_VERSION" https://github.com/denoland/rusty_v8
 cd ./rusty_v8
 git config -f .gitmodules submodule.v8.shallow true
