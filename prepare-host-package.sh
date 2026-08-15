@@ -1,6 +1,6 @@
 set -e
 umask 022
-DEBIAN_CODENAME="bookworm"
+DEBIAN_CODENAME="trixie"
 sudo apt update
 sudo apt install -y mmdebstrap systemd-container debian-archive-keyring
 cat << EOL > /tmp/debian.sources
