@@ -2,7 +2,7 @@ set -e
 umask 022
 DEBIAN_CODENAME="trixie"
 sudo apt update
-sudo apt install -y mmdebstrap systemd-container debian-archive-keyring
+sudo apt install -y mmdebstrap systemd-container debian-archive-keyring qemu-user-binfmt binfmt-support
 cat << EOL > /tmp/debian.sources
 deb http://deb.debian.org/debian/ $DEBIAN_CODENAME main contrib
 deb-src http://deb.debian.org/debian/ $DEBIAN_CODENAME main contrib
