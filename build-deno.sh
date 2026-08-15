@@ -25,7 +25,7 @@ RUST_TARGET="armv7-unknown-linux-gnueabihf"
 export CC_armv7_unknown_linux_gnueabihf="$PREFIX-gcc"
 export CXX_armv7_unknown_linux_gnueabihf="$PREFIX-g++"
 export AR_armv7_unknown_linux_gnueabihf="$PREFIX-ar"
-export CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER="$PREFIX-gcc"
+export CARGO_TARGET_ARMV7_UNKNOWN_LINUX_GNUEABIHF_LINKER="$PREFIX-ld"
 export QEMU_LD_PREFIX="/usr/$PREFIX"
 sudo ln -s /usr/$PREFIX/lib/ld-linux-armhf.so.3 \
 	/lib/ld-linux-armhf.so.3 || echo "ld-linux-armhf is already linked"
