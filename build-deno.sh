@@ -16,7 +16,7 @@ export RUST_BACKTRACE=1
 export V8_FROM_SOURCE=1
 export SCCACHE="$(command -v sccache)"
 export LIBCLANG_PATH="/usr/lib/llvm-$CLANG_VERSION/lib"
-export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" custom_toolchain=\"//build/toolchain/linux/unbundle:default\" v8_enable_pointer_compression=false"
+export EXTRA_GN_ARGS="clang_version=\"$CLANG_VERSION\" target_cpu=\"arm\" v8_target_cpu=\"arm\" host_toolchain=\"//build/toolchain/linux/unbundle:default\" custom_toolchain=\"//build/toolchain/linux/unbundle:default\" v8_enable_pointer_compression=false sysroot=\"/usr/$PREFIX\""
 export PRINT_GN_ARGS=1
 RUST_TARGET="armv7-unknown-linux-gnueabihf"
 export CARGO_CFG_TARGET_ARCH="$RUST_TARGET"
@@ -48,7 +48,7 @@ cd ./deno
 mkdir -p /tmp/hosttmp/deno_deb
 cargo build --target "$RUST_TARGET" --release
 echo "Build succeeded at $(date -u)"
-podman run --rm -v ./target/release/deno:/bin/deno gcr.io/distroless/cc /bin/deno run tests/testdata/run/002_hello.ts
+podman run --rm -v ./target/release/deno:/bin/deno gcr.io/distroless/cc:latest-arm /bin/deno run tests/testdata/run/002_hello.ts
 echo "Hello test succeeded"
 TGZNAME="deno-"$DENO_VERSION"-"$PLATFORM".tar.gz"
 tar --numeric-owner -C ./target/release/ -cf - . | gzip -n > /tmp/hosttmp/deno_deb/"$TGZNAME"
